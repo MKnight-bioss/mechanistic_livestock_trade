@@ -1032,7 +1032,7 @@ int main() {
         double avg_lost_income_equi = 0.0;
 
         for (int i = 0; i < vector_size; ++i) {
-            //output time series data for given epsilon_b value
+            //output time series data for given shock value
             out_file << i * increment_size << "," << demand_shock << "," << avg_avg_eta_unit_time[i]
                      << ","
                      << avg_avg_zeta_unit_time[i] << ","
@@ -1057,7 +1057,7 @@ int main() {
                 avg_lost_income_equi += avg_avg_lost_income_unit_time[i] / 25.0;
             }
         }
-        //output equilibrium average trade quantities for given epsilon_b value
+        //output equilibrium average trade quantities for given shock value
         out_file2 << demand_shock << "," << avg_eta_equi << "," << avg_zeta_equi << "," << avg_demand_equi << ","
                   << avg_supply_equi << "," << avg_traders_equi << ","
                   << avg_trades_equi << "," << avg_trade_size_equi << "," << avg_in_vol_equi << "," << avg_price_equi
