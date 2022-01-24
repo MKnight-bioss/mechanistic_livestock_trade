@@ -5,6 +5,6 @@ Code requires installation of GSL random number generator. This can be obtained 
 
 Code requires a single input file, "trade_quantities_final.csv". This file contains stock generation rates, average trade quantities, and values for the a, b, and partnership cessation rate required to simulate the system. All code is presented within the `main` function. Users can freely edit code as desired.
 
+The C++ file `trade_model_demand_shocks.cpp` performs the simulations analysing the system response to shocks in farm-level demand. This will produce two output files, one outputting time series data of trade quantities for each shock, the other outputting system-average values of trade quantities for each shock.
+
 The C++ file `trade_model_changes_to_epsilon_b.cpp` performs the simulations analysing the system with changes to trading propensities via different values of epsilon_b as described in the main text. Running this model will produce two output files, one outputting time series data for each value of epsilon_b, the other outputting equilibrium system-average values of trade quantities.
-
-
