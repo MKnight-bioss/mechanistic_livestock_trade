@@ -58,13 +58,13 @@ int main() {
     ofstream out_file;
     out_file.open(path + name + type);
     out_file
-            << "time,epsilon,eta,zeta,needs,supply,traders,trades,trade_size,in_flow,price,infected,income,lost_income"
+            << "time,epsilon,eta,zeta,needs,supply,traders,trades,trade_size,in_flow,price,infected"
             << endl;
 
     //open file 2 and output column headers
     ofstream out_file2;
     out_file2.open(path + name2 + type);
-    out_file2 << "epsilon,eta,zeta,needs,supply,traders,trades,trade_size,in_flow,price,infected,income,lost_income"
+    out_file2 << "epsilon,eta,zeta,needs,supply,traders,trades,trade_size,in_flow,price,infected"
               << endl;
 
     //read in param data
@@ -996,8 +996,7 @@ int main() {
                      << avg_avg_traders_unit_time[i] << "," << avg_avg_trades_unit_time[i] << ","
                      << avg_avg_trade_size_unit_time[i] << "," << avg_avg_in_vol_unit_time[i] << ","
                      << avg_avg_price_unit_time[i] << ","
-                     << avg_avg_infected_unit_time[i] << "," << avg_avg_income_unit_time[i] << ","
-                     << avg_avg_lost_income_unit_time[i] << endl;
+                     << avg_avg_infected_unit_time[i] << endl;
             //calculate equilibrium average values of trade quantities over final 25 time units of sim
             if (i * increment_size >= t_max - 25.0) {
                 avg_eta_equi += avg_avg_eta_unit_time[i] / 25.0;
@@ -1018,7 +1017,7 @@ int main() {
         out_file2 << epsilon_b << "," << avg_eta_equi << "," << avg_zeta_equi << "," << avg_demand_equi << ","
                   << avg_supply_equi << "," << avg_traders_equi << ","
                   << avg_trades_equi << "," << avg_trade_size_equi << "," << avg_in_vol_equi << "," << avg_price_equi
-                  << "," << avg_inf_equi << "," << avg_income_equi << "," << avg_lost_income_equi << endl;
+                  << "," << avg_inf_equi << endl;
 
         long double param_end_time = time(NULL);
         cout << "PARAM TIME TAKEN: " << (param_end_time - param_start_time) / 60.0 << " mins" << endl;
