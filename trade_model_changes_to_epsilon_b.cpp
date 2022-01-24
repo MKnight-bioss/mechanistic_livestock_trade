@@ -142,7 +142,7 @@ int main() {
         //vectors storing average time series values when averaged over num_reps
         vector<double> avg_avg_eta_unit_time(vector_size, 0);
         vector<double> avg_avg_zeta_unit_time(vector_size, 0);
-        vector<double> avg_avg_needs_unit_time(vector_size, 0);
+        vector<double> avg_avg_demand_unit_time(vector_size, 0);
         vector<double> avg_avg_supply_unit_time(vector_size, 0);
         vector<double> avg_avg_traders_unit_time(vector_size, 0);
         vector<double> avg_avg_trades_unit_time(vector_size, 0);
@@ -174,7 +174,7 @@ int main() {
             //vectors storing time series data for current rep
             vector<double> avg_eta_unit_time(vector_size, 0);
             vector<double> avg_zeta_unit_time(vector_size, 0);
-            vector<double> avg_needs_unit_time(vector_size, 0);
+            vector<double> avg_demand_unit_time(vector_size, 0);
             vector<double> avg_supply_unit_time(vector_size, 0);
             vector<double> avg_traders_unit_time(vector_size, 0);
             vector<double> trade_size_unit_time(vector_size, 0);
@@ -455,7 +455,7 @@ int main() {
                                         avg_eta_unit_time[time_index] += change_to_demand_rate / N;
                                         avg_zeta_unit_time[time_index] += change_to_supply_rate / N;
                                         avg_price_unit_time[time_index] += price_change;
-                                        avg_needs_unit_time[time_index] += 1.0 / N;
+                                        avg_demand_unit_time[time_index] += 1.0 / N;
                                     }
                                 }
                             }
@@ -865,7 +865,7 @@ int main() {
                                                 ++avg_trades_unit_time[time_index];
                                                 avg_in_vol_unit_time[time_index] += trade_size;
 
-                                                avg_needs_unit_time[time_index] -= trade_size / N;
+                                                avg_demand_unit_time[time_index] -= trade_size / N;
                                                 avg_supply_unit_time[time_index] -= trade_size / N;
                                             }
                                             //update equilibrium values
@@ -916,7 +916,7 @@ int main() {
             avg_eta_unit_time[0] = avg_eta_init;
             avg_zeta_unit_time[0] = avg_zeta_init;
             avg_price_unit_time[0] = price_equi;
-            avg_needs_unit_time[0] = 0.0;
+            avg_demand_unit_time[0] = 0.0;
             avg_supply_unit_time[0] = 0.0;
             avg_traders_unit_time[0] = 0.0;
             avg_trade_size_unit_time[0] = 0.0;
@@ -928,7 +928,7 @@ int main() {
                     if (i > 0) {
                         avg_eta_unit_time[i] += avg_eta_unit_time[i - 1];
                         avg_zeta_unit_time[i] += avg_zeta_unit_time[i - 1];
-                        avg_needs_unit_time[i] += avg_needs_unit_time[i - 1];
+                        avg_demand_unit_time[i] += avg_demand_unit_time[i - 1];
                         avg_supply_unit_time[i] += avg_supply_unit_time[i - 1];
                         avg_traders_unit_time[i] += avg_traders_unit_time[i - 1];
                         avg_price_unit_time[i] += avg_price_unit_time[i - 1];
@@ -940,7 +940,7 @@ int main() {
                     avg_avg_eta_unit_time[i] += avg_eta_unit_time[i] / num_reps;
                     avg_avg_zeta_unit_time[i] += avg_zeta_unit_time[i] / num_reps;
                     avg_avg_price_unit_time[i] += avg_price_unit_time[i] / num_reps;
-                    avg_avg_needs_unit_time[i] += avg_needs_unit_time[i] / num_reps;
+                    avg_avg_demand_unit_time[i] += avg_demand_unit_time[i] / num_reps;
                     avg_avg_supply_unit_time[i] += avg_supply_unit_time[i] / num_reps;
                     avg_avg_traders_unit_time[i] += avg_traders_unit_time[i] / num_reps;
                     avg_avg_trade_size_unit_time[i] += avg_trade_size_unit_time[i] / num_reps;
@@ -992,7 +992,7 @@ int main() {
             out_file << i * increment_size << "," << epsilon_b << "," << avg_avg_eta_unit_time[i]
                      << ","
                      << avg_avg_zeta_unit_time[i] << ","
-                     << avg_avg_needs_unit_time[i] << "," << avg_avg_supply_unit_time[i] << ","
+                     << avg_avg_demand_unit_time[i] << "," << avg_avg_supply_unit_time[i] << ","
                      << avg_avg_traders_unit_time[i] << "," << avg_avg_trades_unit_time[i] << ","
                      << avg_avg_trade_size_unit_time[i] << "," << avg_avg_in_vol_unit_time[i] << ","
                      << avg_avg_price_unit_time[i] << ","
@@ -1001,7 +1001,7 @@ int main() {
             if (i * increment_size >= t_max - 25.0) {
                 avg_eta_equi += avg_avg_eta_unit_time[i] / 25.0;
                 avg_zeta_equi += avg_avg_zeta_unit_time[i] / 25.0;
-                avg_demand_equi += avg_avg_needs_unit_time[i] / 25.0;
+                avg_demand_equi += avg_avg_demand_unit_time[i] / 25.0;
                 avg_supply_equi += avg_avg_supply_unit_time[i] / 25.0;
                 avg_traders_equi += avg_avg_traders_unit_time[i] / 25.0;
                 avg_trades_equi += avg_avg_trades_unit_time[i] / 25.0;
